@@ -15,4 +15,6 @@ dependencies = [
     "yfinance>=0.2.52",
     "twilio>=9.4.4",
     "trafilatura>=2.0.0",
+    "pymongo>=4.11.1",
+    "python-dotenv>=1.0.1",
 ]

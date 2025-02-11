@@ -7,15 +7,19 @@ from stock_analyzer import StockAnalyzer
 from ai_analyzer import AIAnalyzer
 from utils import get_stock_data, format_analysis
 from patterns import identify_patterns
+from database import MongoDB
+from config import DEBUG, PORT, HOST
 import logging
-import os
 
 # Configure logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.DEBUG if DEBUG else logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+# Initialize MongoDB connection
+db = MongoDB()
 
 # Configure Streamlit page
 try:
@@ -103,7 +107,15 @@ def main():
                             ai_analysis = ai_analyzer.analyze_stock(df)
                             formatted_analysis = format_analysis(ai_analysis)
                             st.write(formatted_analysis)
-                            logger.info(f"AI analysis completed for {stock}")
+
+                            # Save analysis to MongoDB
+                            analysis_data = {
+                                'ai_analysis': ai_analysis,
+                                'patterns': patterns,
+                                'metrics': analyzer.calculate_metrics()
+                            }
+                            db.save_stock_analysis(stock, analysis_data)
+                            logger.info(f"AI analysis completed and saved for {stock}")
 
                         # Performance Metrics
                         with st.expander("📈 Performance Metrics", expanded=True):
@@ -127,6 +139,9 @@ def main():
         st.error(f"An unexpected error occurred: {str(e)}")
         st.info("Please try refreshing the page. If the issue persists, contact support.")
         logger.error(f"Application error: {str(e)}", exc_info=True)
+    finally:
+        # Close MongoDB connection
+        db.close()
 
 if __name__ == "__main__":
     main()
