@@ -14,5 +14,5 @@ serverAddress = "0.0.0.0"
 serverPort = 5000
 
 [logger]
-level = "info"
-messageFormat = "%(asctime)s %(message)s"
+level = "debug"
+messageFormat = "%(asctime)s %(levelname)s %(message)s"

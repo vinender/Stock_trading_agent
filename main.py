@@ -8,9 +8,13 @@ from ai_analyzer import AIAnalyzer
 from utils import get_stock_data, format_analysis
 from patterns import identify_patterns
 import logging
+import os
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
 
 # Configure Streamlit page
@@ -114,7 +118,7 @@ def main():
                         logger.error(f"No data available for {stock}")
                 except Exception as e:
                     st.error(f"Error analyzing {stock}: {str(e)}")
-                    logger.error(f"Error processing {stock}: {str(e)}")
+                    logger.error(f"Error processing {stock}: {str(e)}", exc_info=True)
         else:
             st.info("Please select one or more stocks from the sidebar to begin analysis.")
             logger.info("No stocks selected")
@@ -122,7 +126,7 @@ def main():
     except Exception as e:
         st.error(f"An unexpected error occurred: {str(e)}")
         st.info("Please try refreshing the page. If the issue persists, contact support.")
-        logger.error(f"Application error: {str(e)}")
+        logger.error(f"Application error: {str(e)}", exc_info=True)
 
 if __name__ == "__main__":
     main()
