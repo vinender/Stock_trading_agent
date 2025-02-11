@@ -13,4 +13,5 @@ dependencies = [
     "streamlit>=1.42.0",
     "ta>=0.11.0",
     "yfinance>=0.2.52",
+    "twilio>=9.4.4",
 ]
