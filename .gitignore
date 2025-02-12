@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+*.dll
+
+# Virtual environment
+venv/
+.env
+*.venv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Log files
+logs/
+*.log
+debug.log
+
+# Cache
+.cache/
+pip-wheel-metadata/
+__pypackages__/
+
+# VS Code settings
+.vscode/
+
+# Environment variables / credentials
+.env
+*.env
+secrets.json
+config.yaml
+openai_api_key.txt
