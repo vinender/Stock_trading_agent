@@ -16,7 +16,8 @@ class AIAnalyzer:
             2. Key candlestick patterns identified
             3. Potential support and resistance levels
             4. Short-term trading recommendation with rationale
-            5. Important technical indicators (RSI, MACD)
+            5. Based on the data, what is the likely price movement in the next 5 trading days?
+            6. Important technical indicators (RSI, MACD)
             """
         )
 
@@ -49,5 +50,6 @@ class AIAnalyzer:
         1. What is the typical success rate of this pattern?
         2. What are the key price levels to watch?
         3. What is the recommended trading strategy?
+        4. 
         """
         return self.llm.predict(prompt)
